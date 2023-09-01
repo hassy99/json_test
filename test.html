@@ -17,7 +17,7 @@
     // HTTPサーバーを作成
     const server = http.createServer((req, res) => {
         // GETリクエストへの応答
-        if (req.method === 'GET' && req.url === '/json_test/test') {
+        if (req.method === 'GET' && req.url === '/test') {
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify(tokyoWeatherData));
         } else {
