@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+    const http = require('http');
+    // 東京の天気情報をシミュレートするダミーデータ
+    const tokyoWeatherData = {
+        city: "Tokyo",
+        clouds: "20%",
+        icon: "http://openweathermap.org/img/w/02n.png",
+        temp: 28.71
+    };
+
+    // HTTPサーバーを作成
+    const server = http.createServer((req, res) => {
+        // GETリクエストへの応答
+        if (req.method === 'GET' && req.url === '/sparta_api/weather/tokyo') {
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(tokyoWeatherData));
+        } else {
+            // 404 Not Foundエラー
+            res.statusCode = 404;
+            res.end('Not Found');
+        }
+    });
+
+    // サーバーをポート3000でリッスン
+    const port = 3000; // 適切なポート番号を指定
+    server.listen(port, () => {
+        console.log(`APIサーバーがポート${port}で実行中...`);
+    });
+
+    </script>
+
+</head>
+<body>
+
+</body>
+</html>
