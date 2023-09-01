@@ -1,6 +1,6 @@
 {
-  city: "Tokyo",
-  clouds: "20%",
-  icon: "http://openweathermap.org/img/w/02d.png",
-  temp: 30.34
+    "city": "Tokyo",
+    "clouds": "20%",
+    "icon": "http://openweathermap.org/img/w/02d.png",
+    "temp": 30.34
 }
