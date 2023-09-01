@@ -2,35 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>JSON API Endpoint</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Request</title>
 </head>
 <body>
     <h1>JSON Data</h1>
     <pre id="json-data"></pre>
 
     <script>
-        // JSONデータを定義
-        const jsonData = {
-            "city": "Tokyo",
-            "clouds": "20%",
-            "icon": "http://openweathermap.org/img/w/02d.png_test1850",
-            "temp": 30.34
-        };
+        // JSONファイルのURL
+        const jsonUrl = "https://hassy99.github.io/json_test/test.json";
 
-        // JSONデータを返すエンドポイントの処理
-        function handleRequest(req, res) {
-            res.writeHead(200, { "Content-Type": "application/json" });
-            res.end(JSON.stringify(jsonData));
+        // JSONファイルを取得する関数
+        function fetchJsonData() {
+            fetch(jsonUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // 取得したJSONデータを文字列に整形して表示
+                    const jsonText = JSON.stringify(data, null, 4); // インデント付き
+                    document.getElementById('json-data').textContent = jsonText;
+                })
+                .catch(error => {
+                    console.error('JSONデータの取得に失敗しました', error);
+                });
         }
 
-        // サーバーを作成し、APIエンドポイントのリクエストを処理
-        const http = require('http');
-        const server = http.createServer(handleRequest);
-        const port = 3000; // 適切なポート番号を指定
-
-        server.listen(port, () => {
-            console.log(`APIエンドポイントがポート${port}で実行中...`);
-        });
+        // ページの読み込みが完了したらJSONデータを取得
+        window.addEventListener('load', fetchJsonData);
     </script>
 </body>
 </html>
