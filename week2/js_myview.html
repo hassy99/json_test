@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Request</title>
+</head>
+<body>
+    <h1>JSON Data</h1>
+    <pre id="json-data"></pre>
+
+    <script>
+        // JSONファイルのURL
+        const jsonUrl = "https://hassy99.github.io/json_test/test.json";
+
+        // JSONファイルを取得する関数
+        function fetchJsonData() {
+            fetch(jsonUrl)
+                .then(response => response.json())
+                .then(data => {
+                    // 取得したJSONデータを文字列に整形して表示
+                    const jsonText = JSON.stringify(data, null, 4); // インデント付き
+                    document.getElementById('json-data').textContent = jsonText;
+                })
+                .catch(error => {
+                    console.error('JSONデータの取得に失敗しました', error);
+                });
+        }
+
+        // ページの読み込みが完了したらJSONデータを取得
+        window.addEventListener('load', fetchJsonData);
+    </script>
+</body>
+</html>
